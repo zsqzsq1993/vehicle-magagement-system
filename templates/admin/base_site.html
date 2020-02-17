@@ -1,0 +1,9 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ site_title|default:_("耐久车辆线上管理系统") }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">耐久车辆线上管理系统</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

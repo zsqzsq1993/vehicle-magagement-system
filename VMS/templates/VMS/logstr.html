@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>耐久车辆管理系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'VMS/dashboard.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'VMS:index'%}">耐久车辆管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'VMS:logout' %}">LOGOUT {{username}}</a></li>
+          </ul>
+        </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="{% url 'VMS:index'%}">总览<span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1>基本信息</h1>
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th>项目名称</th>
+                <th>{{vehicle.project}}</th>
+                  <th>车辆编号</th>
+                <th>{{vehicle.vehicle_number}}</th>
+              </tr>
+              <tr>
+                <th>项目类型</th>
+                <th>{{vehicle.vehicle_testtype}}</th>
+                <th>车辆类型</th>
+                <th>{{vehicle.vehicle_cartype}}</th>
+              </tr>
+              <tr>
+                <th>累计坏路(km)</th>
+                <th>{{vehicle.vehicle_badroad}}</th>
+                <th>累计进度(%)</th>
+                <th>{{vehicle.vehicle_process}}</th>
+              </tr><tr>
+              {% if vehicle.vehicle_cartype == '油车' %}
+                <th>累计加油(L)</th>
+                <th>{{vehicle.vehicle_fuel}}</th>
+              {% else %}
+                <th>累计耗电(kw)</th>
+                <th>{{vehicle.vehicle_fuel}}</th>
+              {% endif %}
+                <th>正常开展</th>
+                <th>{{vehicle.vehicle_continue}}</th>
+            </tbody>
+          </table>
+          <h2>耐久日志</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>日期</th>
+                  <th>驾驶员</th>
+                  <th>上班时间</th>
+                  <th>下班时间</th>
+                  <th>上车里程</th>
+                  <th>下车里程</th>
+                  <th>坏路里程</th>
+                  <th>能耗</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for log in logstr_list %}
+                <tr>
+                  <td>{{log.log_date}}</td>
+                  <td>{{log.log_name}}</td>
+                  <td>{{log.log_start_time}}</td>
+                  <td>{{log.log_end_time}}</td>
+                  <td>{{log.log_start_kilo}}</td>
+                  <td>{{log.log_end_kilo}}</td>
+                  <td>{{log.log_badroad}}</td>
+                  <td>{{log.log_fuel}}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

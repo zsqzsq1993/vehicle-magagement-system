@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>耐久车辆管理系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'VMS/dashboard.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'VMS:index'%}">耐久车辆管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'VMS:logout' %}">LOGOUT {{username}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="{% url 'VMS:index'%}">总览<span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">车辆总览</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>序号</th>
+                  <th>项目名称</th>
+                  <th>车辆编号</th>
+                  <th>试验类型</th>
+                  <th>累计循环</th>
+                  <th>耐久里程(km)</th>
+                  <th>试验进度(%)</th>
+                  <th>正常开展</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for vehicle in vehiclecom_list %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{vehicle.project}}</td>
+                  <td><a href="{% url 'VMS:logcom' vehicle.id %}">{{vehicle.vehicle_number}}</a></td>
+                  <td>{{vehicle.vehicle_testtype}}</td>
+                  <td>{{vehicle.vehicle_main}}</td>
+                  <td>{{vehicle.vehicle_totkilo}}</td>
+                  <td>{{vehicle.vehicle_process}}</td>
+                  <td>{{vehicle.vehicle_continue}}</td>
+                </tr>
+              {% endfor %}
+              {% for vehicle in vehiclestr_list %}
+              <tr>
+                  <td>{{forloop.counter|add:num}}</td>
+                  <td>{{vehicle.project}}</td>
+                <td><a href="{% url 'VMS:logstr' vehicle.id %}">{{vehicle.vehicle_number}}</a></td>
+                  <td>{{vehicle.vehicle_testtype}}</td>
+                  <td>-</td>
+                  <td>{{vehicle.vehicle_badroad}}</td>
+                  <td>{{vehicle.vehicle_process}}</td>
+                  <td>{{vehicle.vehicle_continue}}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

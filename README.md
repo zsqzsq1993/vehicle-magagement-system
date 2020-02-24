@@ -9,6 +9,7 @@
 * 腾讯云服务器
 * Ubuntu 18.04.1 LTS
 * Django 3.0.3
+* bootstrap 3.3.7
 * Python 3.6.9
 * Git
 * Uwsgi

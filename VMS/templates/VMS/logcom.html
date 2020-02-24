@@ -63,6 +63,12 @@
                 <th>{{vehicle.vehicle_cartype}}</th>
               </tr>
               <tr>
+                <th>开始日期:</th>
+                <th>{{vehicle.vehicle_startdate}}</th>
+                <th>下载日志:</th>
+                <th><a href="{% url 'VMS:downloadcom' vehicle.id%}">下载</a></th>
+              </tr>
+              <tr>
                 <th>累计主循环:</th>
                 <th>{{vehicle.vehicle_main}}</th>
                 <th>累计A循环:</th>

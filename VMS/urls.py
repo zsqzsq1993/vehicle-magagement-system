@@ -8,4 +8,6 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('logcom/<int:vehicle_id>',views.logcom, name='logcom'),
     path('logstr/<int:vehicle_id>',views.logstr, name='logstr'),
+    path('logcom/<int:vehicle_id>/download/',views.downloadcom,name='downloadcom'),
+    path('logstr/<int:vehicle_id>/download/',views.downloadstr,name='downloadstr')
 ]

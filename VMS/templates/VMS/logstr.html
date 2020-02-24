@@ -76,8 +76,8 @@
                 <th>累计耗电(kw)</th>
                 <th>{{vehicle.vehicle_fuel}}</th>
               {% endif %}
-                <th>正常开展</th>
-                <th>{{vehicle.vehicle_continue}}</th>
+                <th>下载日志</th>
+                <th><a href="{% url 'VMS:downloadstr' vehicle.id%}">下载</a></th>
             </tbody>
           </table>
           <h2>耐久日志</h2>
